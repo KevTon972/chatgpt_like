@@ -1,0 +1,32 @@
+{% load static%}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"
+  >
+</head>
+<body>
+  <div class="main">
+    <div class="nav">
+      <nav>
+        <button class="newChat"> + New Chat</button>
+        <div class="history"></div>
+      </nav>
+    </div>
+    <div id="chat-container">
+      <div id="chat-header">
+        <h1>ChatGPT</h1>
+      </div>
+      <div id="chat-messages">
+        <!-- Les messages du chat seront ajoutés dynamiquement ici -->
+      </div>
+      <div id="chat-input">
+        <input type="text" id="user-input" placeholder="Entrez votre message...">
+        <button id="send-button">Envoyer</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
