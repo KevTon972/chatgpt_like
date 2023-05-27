@@ -26,7 +26,21 @@ body {
 .main {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
+}
+
+#chat-header {
+  display: flex;
+  justify-content: center;
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .side-bar {
@@ -50,4 +64,16 @@ nav {
 
 nav p {
   margin: 0;
+}
+
+#chat-input {
+  display: flex;
+  justify-content: center;
+}
+
+#user-input {
+  height: 45px;
+  border-radius: 10px;
+  box-shadow: #202123;
+  width: 100vh;
 }
