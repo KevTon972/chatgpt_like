@@ -14,13 +14,14 @@ body {
 }
 
 .newChat {
-  border-color: #fff;
-  background-color: #202123;
+  border: solid 0.5px rgba(105, 105, 105, 0.5);
+  background-color: transparent;
   font-size: 20px;
-  margin: 15px;
-  padding-right: 55px;
-  border-radius: 10px;
-  height: 50px;
+  margin: 10px;
+  border-radius: 8px;
+  height: 60px;
+  padding-left: 20px;
+  text-align: left;
 }
 
 .main {
@@ -30,24 +31,28 @@ body {
   width: 100%;
 }
 
-#chat-header {
-  display: flex;
-  justify-content: center;
-}
-
 .main-section {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
 }
 
 .side-bar {
   background-color: #202123;
-  width: 244px;
+  width: 380px;
   height: 100vh;
   padding: 0, 35px;
+
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
 }
 
 h1 {
@@ -59,21 +64,34 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
   height: 100%;
-}
-
-nav p {
-  margin: 0;
 }
 
 #chat-input {
   display: flex;
   justify-content: center;
+  text-align: center;
+  width: 70%;
+  position: relative;
+}
+
+#chat-input #submit {
+  position: absolute;
+  cursor: pointer;
+  right: 20px;
+  top: 17px;
 }
 
 #user-input {
-  height: 45px;
-  border-radius: 10px;
-  box-shadow: #202123;
-  width: 100vh;
+  font-size: 20px;
+  border-radius: 8px;
+  padding: 12px 15px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.05);
+}
+
+#user-input:focus {
+  outline: none;
 }
