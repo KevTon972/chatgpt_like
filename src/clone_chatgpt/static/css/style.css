@@ -29,19 +29,19 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 100vh;
 }
 
 .main-section {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 100%;
 }
 
 .side-bar {
   background-color: #202123;
   width: 410px;
-  height: 100vh;
+  height: auto;
   padding: 0, 35px;
 }
 
@@ -63,7 +63,7 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  height: 100%;
+  height: 100vh;
 }
 
 .bottom-nav {
@@ -75,11 +75,13 @@ nav {
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 95%;
   position: relative;
 }
 
 #chat-input #submit {
+  border: none;
+  background-color: inherit;
   position: absolute;
   cursor: pointer;
   right: 35px;
@@ -91,8 +93,9 @@ nav {
   border-radius: 8px;
   padding: 20px 15px;
   width: 100%;
+  box-shadow: rgba(0,0,0,0.05) 0 8px 15px,
+  rgba(0,0,0,0.05) 0 -8px 15px;
   background-color: #3a3c4a;
-  box-shadow: rgba(0, 0, 0, 0.05);
   border: none;
 }
 
@@ -103,9 +106,8 @@ nav {
 .example-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 80%;
+  overflow: hidden;
+  width: 73%;
   padding: 0 1.6rem;
   gap: 0.875rem;
 }
@@ -113,16 +115,14 @@ nav {
 ul {
   margin: 0;
   padding: 0;
+  gap: 0.875rem;
   list-style: none;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 0.875rem;
 }
 
 li {
   background-color: hsla(0,0%,100%,.05);
-  box-sizing: border-box;
   padding: 0.80rem;
   border-radius: 8px;
   font-size: 20px;
@@ -152,4 +152,6 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 70%;
+  padding-bottom: 8px;
 }

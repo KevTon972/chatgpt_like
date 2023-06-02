@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>ChatGPT</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"
   >
 </head>
 <body>
@@ -59,8 +59,9 @@
         </div>
         <div class="bottom-page">
           <div id="chat-input">
+            {% csrf_token %}
             <input type="text" id="user-input" placeholder="Entrez votre message...">
-            <div id="submit">➢</div>
+            <button type="submit" id="submit" onclick="submitFunction()">➢</button>
           </div>
           <div class="bottom">
             <p class="info">Free Research Preview. ChatGPT may produce inaccurate information about people,
@@ -70,8 +71,8 @@
         </div>
       </div>
     </section>
-
   </div>
-
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script type="module" src="{% static 'js/index.js' %}"></script>
 </html>
