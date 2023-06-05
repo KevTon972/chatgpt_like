@@ -1,15 +1,15 @@
 import key from './creds.js'
 
-function submitFunction() {
+async function submitFunction() {
+    var api_key = key()
     const userInput = document.getElementById('user-input').value
-    const API_KEY = key()
 
     $.ajax({
         url: "https://api.openai.com/v1/chat/completions",
         type: "POST",
-        header: {
-            "Autorization": "Bearer " + API_KEY,
-            "Content-Type": 'application/json',
+        headers: {
+            "Authorization": `Bearer ${api_key}`,
+            "Content-Type": "application/json",
         },
         data: JSON.stringify({
             model: "gpt-3.5-turbo",
@@ -18,7 +18,8 @@ function submitFunction() {
         }),
         dataType: "json",
         success: function(response) {
-          var reponse = response.reponse;
+          var reponse = response.choices[0].text;
+          console.log(response)
           $("#chat-messages").text(reponse);
         },
         error: function(error) {
