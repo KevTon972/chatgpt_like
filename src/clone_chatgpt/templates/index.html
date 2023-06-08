@@ -23,7 +23,7 @@
         <div id="chat-header">
           <h1>ChatGPT_Like</h1>
         </div>
-        <div class="example-container">
+        <div class="example-container" {% if chatgpt_response %}style="display: none;"{% endif %}>
           <div class="examples">
             <h2>
               Examples
@@ -55,8 +55,11 @@
             </ul>
           </div>
         </div>
+        <div id="user-chat">
+          <!-- l'input du user sera ajouté dynamiquement ici -->
+        </div>
         <div id="chat-messages">
-          <!-- Les messages du chat seront ajoutés dynamiquement ici -->
+          <!-- Les reponse de l'IA seront ajoutés dynamiquement ici -->
         </div>
         <div class="bottom-page">
           <div id="chat-input">

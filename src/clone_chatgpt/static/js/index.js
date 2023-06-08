@@ -1,5 +1,7 @@
 import key from './creds.js'
 
+const btn = document.querySelector('#submit')
+let userInput = document.querySelector('#user-input')
 
 function getCookie(name) {
   let cookieValue = null;
@@ -17,9 +19,10 @@ function getCookie(name) {
   return cookieValue;
 }
 
+const csrftoken = getCookie('csrftoken');
+
 async function sendResquestToOpenaiApi(){
     var api_key = key()
-    var userInput = document.getElementById('user-input').value
 
     try {
       const response = await $.ajax({
@@ -31,12 +34,13 @@ async function sendResquestToOpenaiApi(){
         },
         data: JSON.stringify({
             model: "gpt-3.5-turbo",
-            messages: [{role: "user", content: userInput}],
+            messages: [{role: "user", content: userInput.value}],
             max_tokens: 100,
         }),
         dataType: "json",
       });
 
+      clearInput()
       var reply = response.choices[0].message;
       return reply;
     }
@@ -47,17 +51,17 @@ async function sendResquestToOpenaiApi(){
 
 
 async function sendReplyToMyView(){
-    var reply = sendResquestToOpenaiApi();
-    var csrftoken = getCookie('csrftoken');
+    var apiReply = await sendResquestToOpenaiApi();
 
     $.ajax({
       url: "get__and_return_chatgpt_response/",
       type: "POST",
       headers: {
-        'X-CSRFToken': csrftoken
+        'X-CSRFToken': csrftoken,
+        "Content-Type": "application/json",
       },
       data: JSON.stringify({
-        response: reply
+        response: apiReply
       }),
       dataType: "json",
       success: function(response) {
@@ -71,6 +75,40 @@ async function sendReplyToMyView(){
     });
   }
 
+async function sendUserInput(){
 
-const btn = document.querySelector('#submit')
-btn.addEventListener('click', sendReplyToMyView)
+    try {
+      const response = await $.ajax({
+        url: "get_and_return_user_input/",
+        type: "POST",
+        headers: {
+          'X-CSRFToken': csrftoken,
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          response: userInput.value
+        }),
+        dataType: "json",
+        success: function(response) {
+          var user_response = response.user_input;
+          $("#user-chat").text(user_response);
+          console.log('Réponse envoyée au backend avec succès');
+        },
+      });
+    }
+      catch (error) {
+        console.error("Erreur :", error);
+      }
+  };
+
+async function clearInput(){
+    userInput.value = ''
+  }
+
+async function chatDisplay(){
+  await sendUserInput()
+  await sendReplyToMyView()
+}
+
+
+btn.addEventListener('click', chatDisplay,)

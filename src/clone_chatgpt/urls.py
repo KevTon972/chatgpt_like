@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import index, get__and_return_chatgpt_response
+from .views import index, get__and_return_chatgpt_response, get_and_return_user_input
 
 urlpatterns = [
     path('', index, name='index'),
     path('get__and_return_chatgpt_response/', get__and_return_chatgpt_response, name='get__and_return_chatgpt_response'),
+    path('get_and_return_user_input/', get_and_return_user_input, name='get_and_return_user_input'),
     path('admin/', admin.site.urls),
 ]
