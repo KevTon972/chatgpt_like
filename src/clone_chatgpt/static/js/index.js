@@ -1,5 +1,6 @@
 import key from './creds.js'
 
+
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -16,13 +17,12 @@ function getCookie(name) {
   return cookieValue;
 }
 
-async function submitFunction() {
+async function sendResquestToOpenaiApi(){
     var api_key = key()
-    const userInput = document.getElementById('user-input').value
-    const csrftoken = getCookie('csrftoken');
+    var userInput = document.getElementById('user-input').value
 
-    // envoie l'input du user a l'api
-    $.ajax({
+    try {
+      const response = await $.ajax({
         url: "https://api.openai.com/v1/chat/completions",
         type: "POST",
         headers: {
@@ -35,34 +35,42 @@ async function submitFunction() {
             max_tokens: 100,
         }),
         dataType: "json",
-        success: function(response) {
-          var reply = response.choices[0].message;
+      });
 
-          // Envoie la réponse au backend Django
-          $.ajax({
-            url: "get_chatgpt_response/",
-            type: "POST",
-            headers: {
-              'X-CSRFToken': csrftoken
-            },
-            data: JSON.stringify({
-              response: reply
-            }),
-            dataType: "json",
-            success: function(response) {
-              var chatResponse = response.chatgpt_response;
-              $("#chat-messages").text(chatResponse);
-              console.log('Réponse envoyée au backend avec succès');
-            },
-            error: function(error) {
-              console.error("Erreur lors de l'envoi de la réponse au backend :", error);
-            }
-          });
-        },
-        error: function(error) {
-          console.error("Erreur :", error);
-        }})
-};
+      var reply = response.choices[0].message;
+      return reply;
+    }
+      catch (error) {
+        console.error("Erreur :", error);
+      }
+    };
+
+
+async function sendReplyToMyView(){
+    var reply = sendResquestToOpenaiApi();
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajax({
+      url: "get__and_return_chatgpt_response/",
+      type: "POST",
+      headers: {
+        'X-CSRFToken': csrftoken
+      },
+      data: JSON.stringify({
+        response: reply
+      }),
+      dataType: "json",
+      success: function(response) {
+        var chatResponse = response.chatgpt_response;
+        $("#chat-messages").text(chatResponse);
+        console.log('Réponse envoyée au backend avec succès');
+      },
+      error: function(error) {
+        console.error("Erreur lors de l'envoi de la réponse au backend :", error);
+      }
+    });
+  }
+
 
 const btn = document.querySelector('#submit')
-btn.addEventListener('click', submitFunction)
+btn.addEventListener('click', sendReplyToMyView)
