@@ -26,8 +26,6 @@ body {
 
 .main {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100vh;
 }
@@ -35,7 +33,9 @@ body {
 .main-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
+  width: 100%;
 }
 
 .side-bar {
@@ -51,6 +51,30 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 100vh;
+}
+
+#chat{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#user-chat p{
+  margin: 0;
+  font-size: 20px;
+  padding: 15px 15px 30px 15px;
+}
+
+#chat-messages{
+  width: 100%;
+}
+
+#chat-messages p{
+  margin: 0;
+  font-size: 20px;
+  padding: 15px 15px 30px 15px;
+  background-color: #3a3c4a;
 }
 
 h1 {

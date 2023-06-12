@@ -19,6 +19,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
+
 const csrftoken = getCookie('csrftoken');
 
 async function sendResquestToOpenaiApi(){
@@ -65,8 +66,10 @@ async function sendReplyToMyView(){
       }),
       dataType: "json",
       success: function(response) {
-        var chatResponse = response.chatgpt_response;
-        $("#chat-messages").text(chatResponse);
+        const pElement = document.createElement("p");
+        const chatResponse = response.chatgpt_response;
+        pElement.innerText = chatResponse
+        document.getElementById('chat-messages').appendChild(pElement)
         console.log('Réponse envoyée au backend avec succès');
       },
       error: function(error) {
@@ -75,8 +78,8 @@ async function sendReplyToMyView(){
     });
   }
 
-async function sendUserInput(){
 
+async function sendUserInput(){
     try {
       const response = await $.ajax({
         url: "get_and_return_user_input/",
@@ -90,8 +93,11 @@ async function sendUserInput(){
         }),
         dataType: "json",
         success: function(response) {
-          var user_response = response.user_input;
-          $("#user-chat").text(user_response);
+          clearExampleContainer()
+          const pElement = document.createElement("p");
+          const user_response = response.user_input;
+          pElement.innerText = user_response
+          document.getElementById('user-chat').appendChild(pElement)
           console.log('Réponse envoyée au backend avec succès');
         },
       });
@@ -101,9 +107,16 @@ async function sendUserInput(){
       }
   };
 
+
 async function clearInput(){
     userInput.value = ''
   }
+
+
+async function clearExampleContainer(){
+    const exampleContainer = document.querySelector('.example-container')
+    exampleContainer.style.display='none'
+}
 
 async function chatDisplay(){
   await sendUserInput()
