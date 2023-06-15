@@ -57,6 +57,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  bottom: 0;
   width: 100%;
 }
 
@@ -68,6 +70,7 @@ body {
 
 #chat-messages{
   width: 100%;
+  border-color: black;
 }
 
 #chat-messages p{
@@ -75,6 +78,7 @@ body {
   font-size: 20px;
   padding: 15px 15px 30px 15px;
   background-color: #3a3c4a;
+  border-color: black;
 }
 
 h1 {
