@@ -13,15 +13,34 @@ body {
   background-color: #343541;
 }
 
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  height: 100vh;
+}
+
+nav .top-nav{
+  padding: 25px 0;
+  width: 100%;
+  text-align: center;
+}
+
 .newChat {
-  border: solid 0.5px rgba(105, 105, 105, 0.5);
   background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+  border: solid 0.5px rgba(105, 105, 105, 0.5);
+  margin-bottom: 15px;
   font-size: 20px;
-  margin: 10px;
   border-radius: 8px;
   height: 60px;
-  padding-left: 20px;
-  text-align: left;
+  padding: 0 80px 7px 10px;
+}
+
+#nav-p{
+  font-size: 20px;
 }
 
 .main {
@@ -84,14 +103,6 @@ body {
 h1 {
   margin-bottom: 10px;
   font-size: 35px;
-}
-
-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  height: 100vh;
 }
 
 .bottom-nav {
@@ -176,6 +187,7 @@ li {
   flex-direction: column;
   gap: 0.875rem;
 }
+
 .bottom-page {
   display: flex;
   flex-direction: column;

@@ -2,7 +2,9 @@ import key from './creds.js'
 
 const btn = document.querySelector('#submit')
 const bottomDiv = document.querySelector('.bottom-page')
+const newChat = document.querySelector('.newChat')
 let userInput = document.querySelector('#user-input')
+
 
 function getCookie(name) {
   let cookieValue = null;
@@ -39,10 +41,8 @@ async function sendUserInput(){
         clearExampleContainer()
         clearChatHeader()
         displayUserInput(user_response)
+        addUserInputToTopNav()
 
-        const historyPElement = document.createElement("p");
-        historyPElement.innerText = userInput.value;
-        document.querySelector('.history').appendChild(historyPElement);
         console.log('Réponse envoyée au backend avec succès');
       },
     });
@@ -73,9 +73,8 @@ async function sendResquestToOpenaiApi(){
         }),
         dataType: "json",
       });
-
-      clearInput()
       var reply = response.choices[0].message;
+      clearInput()
       return reply;
     }
       catch (error) {
@@ -131,6 +130,7 @@ async function clearChatHeader(){
 async function displayUserInput(response){
     const chat = document.getElementById("chat");
       if (chat){
+          chat.style.display = 'flex'
           createUserChatDiv(response, chat)
       } else {
           createChatAndUserChatDiv(response)
@@ -189,21 +189,22 @@ async function createChatMessageDiv(response, chatElement){
 }
 
 
-async function createChatandCHatMessagesDiv(string){
-    const chatContainer = document.querySelector('#chat-container');
-    const divChat = document.createElement("div");
-    const divChatMessages = document.createElement("div");
-    const pElement = document.createElement("p");
-    const chatResponse = string;
-    pElement.innerText = chatResponse;
-    divChat.id = 'chat';
-    divChatMessages.id = 'chat-messages';
+async function addUserInputToTopNav(){
+    const topNav = document.createElement("p");
+    topNav.innerText = userInput.value;
+    topNav.id = 'nav-p'
 
-    divChatMessages.appendChild(pElement);
-    divChat.appendChild(divChatMessages);
-    chatContainer.prepend(divChat);
+    document.querySelector('.top-nav').appendChild(topNav);
 }
 
+async function clearChat(){
+    const chat = document.getElementById("chat");
+    const chatHeader = document.querySelector('#chat-header');
+    const exampleContainer = document.querySelector('.example-container');
+    chat.style.display = 'none'
+    chatHeader.style.display = 'initial'
+    exampleContainer.style.display = 'flex'
+}
 
 async function chatDisplay(){
   await sendUserInput()
@@ -211,4 +212,5 @@ async function chatDisplay(){
 }
 
 
+newChat.addEventListener('click', clearChat,)
 btn.addEventListener('click', chatDisplay,)

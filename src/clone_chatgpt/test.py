@@ -1,7 +1,5 @@
-from django.test import TestCase
-from django.http import JsonResponse
 import json
-import unittest
+from django.test import TestCase
 
 
 class ChatGPTTest(TestCase):
